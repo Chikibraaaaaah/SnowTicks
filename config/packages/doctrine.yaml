@@ -26,11 +26,11 @@ doctrine:
 when@test:
     doctrine:
             dbal:
-                driver: 'pdo_mysql'
-                server_version: '5.7'
-                charset: 'UTF8'
-                url: '%env(resolve:DATABASE_URL)%'
-                dbname_suffix: '_snow%env(default::SNOW)%'
+            driver: 'pdo_mysql'
+            server_version: '5.7'
+            charset: 'UTF8'
+            url: '%env(resolve:DATABASE_URL)%'
+            dbname_suffix: '_snow%env(default::SNOW)%'
 
 when@prod:
     doctrine:
