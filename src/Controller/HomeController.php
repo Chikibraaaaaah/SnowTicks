@@ -20,7 +20,7 @@ class HomeController extends AbstractController
 
         $truc = 5;
 
-        return $this->render('layout/home.twig', [
+        return $this->render('base.html.twig', [
             
         ]);
     }
