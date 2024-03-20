@@ -4,7 +4,7 @@ namespace App\DataFixtures;
 
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
-use App\Entity\Article;
+use App\Entity\Trick;
 use Faker\Factory;
 use Faker\Generator;
 
@@ -23,9 +23,9 @@ class AppFixtures extends Fixture
 
         for($i = 1; $i < 20; $i++){
 
-            $product = new Article();
+            $product = new Trick();
 
-            var_dump($product);
+            // var_dump($product);
             $product->setTitle($this->faker->word(3) . $i);
             $product->setContent($this->faker->sentence(10) . $i);
             $product->setAuthorId(1);

@@ -5,23 +5,22 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Repository\TrickRepository;
 
 class HomeController extends AbstractController
 {
     private $alerts = [];
 
-    private $articles = [];
+    private $Tricks = [];
 
     private $user;
 
-    #[Route("/")]
-    public function homepage()
+    #[Route("/", name: "app_home")]
+    public function index(): Response
     {
 
-        $truc = 5;
-
-        return $this->render('base.html.twig', [
-            
-        ]);
+       return $this->render('base.html.twig', [
+           
+       ]);
     }
 }

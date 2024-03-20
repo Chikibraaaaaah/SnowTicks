@@ -18,7 +18,7 @@ class Comment
     private ?int $autorId = null;
 
     #[ORM\Column]
-    private ?int $articleId = null;
+    private ?int $TrickId = null;
 
     #[ORM\Column(type: Types::TEXT)]
     private ?string $content = null;
@@ -46,14 +46,14 @@ class Comment
         return $this;
     }
 
-    public function getArticleId(): ?int
+    public function getTrickId(): ?int
     {
-        return $this->articleId;
+        return $this->TrickId;
     }
 
-    public function setArticleId(int $articleId): static
+    public function setTrickId(int $TrickId): static
     {
-        $this->articleId = $articleId;
+        $this->TrickId = $TrickId;
 
         return $this;
     }

@@ -2,14 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\ArticleRepository;
-use Doctrine\DBAL\Types\Types;
+use App\Repository\TrickRepository;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 
-
-#[ORM\Entity(repositoryClass: ArticleRepository::class)]
-class Article
+#[ORM\Entity(repositoryClass: TrickRepository::class)]
+class Trick
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -17,10 +14,10 @@ class Article
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $title = null;
+    private ?string $name = null;
 
-    #[ORM\Column(type: Types::TEXT)]
-    private ?string $content = null;
+    #[ORM\Column(length: 5000)]
+    private ?string $description = null;
 
     #[ORM\Column]
     private ?int $authorId = null;
@@ -31,37 +28,31 @@ class Article
     #[ORM\Column]
     private ?\DateTimeImmutable $updatedAt = null;
 
-    public function __construct()   
-    {
-        $this->createdAt = new \DateTimeImmutable();
-        $this->updatedAt = new \DateTimeImmutable();
-    }
-
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getTitle(): ?string
+    public function getName(): ?string
     {
-        return $this->title;
+        return $this->name;
     }
 
-    public function setTitle(string $title): static
+    public function setName(string $name): static
     {
-        $this->title = $title;
+        $this->name = $name;
 
         return $this;
     }
 
-    public function getContent(): ?string
+    public function getDescription(): ?string
     {
-        return $this->content;
+        return $this->description;
     }
 
-    public function setContent(string $content): static
+    public function setDescription(string $description): static
     {
-        $this->content = $content;
+        $this->description = $description;
 
         return $this;
     }
