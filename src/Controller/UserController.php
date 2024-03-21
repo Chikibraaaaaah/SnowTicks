@@ -21,7 +21,7 @@ class UserController extends AbstractController
     }
 
 
-    #[Route('/user', name: 'app_user')]
+    #[Route('/user', name: 'app_user', methods: ['GET'])]
     public function index(): Response
     {
         return $this->render('user/index.html.twig', [
@@ -30,10 +30,13 @@ class UserController extends AbstractController
     }
 
 
+    #[Route('/user', name: 'app_user_get_by_email', methods: ['POST'])]
     public function getByEmail()
     {
-        $email = $this->user['email'];
-        $user = $this->repository->findOneBy("email", $email);
+
+
+        $email = $_POST['email'];
+        $user = $this->repository->findOneBy(["email" => $email]);
         var_dump($user);
 
         die();
