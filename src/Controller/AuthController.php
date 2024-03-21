@@ -36,18 +36,17 @@ class AuthController extends AbstractController
     #[Route('/auth', name: 'app_auth_create', methods: ['POST'])]
     public function create()
     {
-        
-        // $user = $this->repository->findOneBy(['email' => $_POST['email']]);
-        // $this->user = $user;
 
-        $user = $this->repository->find(1);
 
-        
+        $email = $_POST['email'];
+
+        var_dump($email);
+
+
+        $user = $this->repository->findOneBy(["email" => $email]);
         var_dump($user);
+
         die();
-        // if($user) {
-        //     return $this->redirectToRoute('app_home');
-        // };
 
 
     }

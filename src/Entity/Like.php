@@ -24,6 +24,14 @@ class Like
     #[ORM\Column(type: Types::OBJECT)]
     private ?object $related = null;
 
+    #[ORM\Column(type: "datetime_immutable")]
+    #[Assert\DateTime]
+    private ?\DateTimeInterface $createdAt = null;
+
+    #[ORM\Column(type: "datetime_immutable")]
+    #[Assert\DateTime]
+    private ?\DateTimeInterface $updatedAt = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -61,6 +69,30 @@ class Like
     public function setRelated(object $related): static
     {
         $this->related = $related;
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeImmutable
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeImmutable $createdAt): static
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeImmutable
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(\DateTimeImmutable $updatedAt): static
+    {
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }

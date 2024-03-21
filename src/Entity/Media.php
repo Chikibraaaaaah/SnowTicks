@@ -19,6 +19,14 @@ class Media
     #[ORM\Column(length: 255)]
     private ?string $path = null;
 
+    #[ORM\Column(type: "datetime_immutable")]
+    #[Assert\DateTime]
+    private ?\DateTimeInterface $createdAt = null;
+
+    #[ORM\Column(type: "datetime_immutable")]
+    #[Assert\DateTime]
+    private ?\DateTimeInterface $updatedAt = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -44,6 +52,30 @@ class Media
     public function setPath(string $path): static
     {
         $this->path = $path;
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeImmutable
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeImmutable $createdAt): static
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeImmutable
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(\DateTimeImmutable $updatedAt): static
+    {
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }

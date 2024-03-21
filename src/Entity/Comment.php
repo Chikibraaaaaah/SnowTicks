@@ -23,11 +23,13 @@ class Comment
     #[ORM\Column(type: Types::TEXT)]
     private ?string $content = null;
 
-    #[ORM\Column]
-    private ?\DateTimeImmutable $createdAt = null;
+    #[ORM\Column(type: "datetime_immutable")]
+    #[Assert\DateTime]
+    private ?\DateTimeInterface $createdAt = null;
 
-    #[ORM\Column]
-    private ?\DateTimeImmutable $updatedAt = null;
+    #[ORM\Column(type: "datetime_immutable")]
+    #[Assert\DateTime]
+    private ?\DateTimeInterface $updatedAt = null;
 
     public function getId(): ?int
     {
