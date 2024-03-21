@@ -40,11 +40,11 @@ class User
     #[Assert\NotBlank]
     private ?string $imgUrl = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[ORM\Column(type: "datetime_immutable")]
     #[Assert\DateTime]
     private ?\DateTimeInterface $createdAt = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[ORM\Column(type: "datetime_immutable")]
     #[Assert\DateTime]
     private ?\DateTimeImmutable $updatedAt = null;
 

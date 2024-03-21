@@ -7,6 +7,7 @@ use Doctrine\Persistence\ObjectManager;
 use App\Entity\Trick;
 use Faker\Factory;
 use Faker\Generator;
+use Monolog\DateTimeImmutable;
 
 class AppFixtures extends Fixture
 {
@@ -23,14 +24,21 @@ class AppFixtures extends Fixture
 
         for($i = 1; $i < 20; $i++){
 
-            $product = new Trick();
+            $fakeTrick = new Trick();
 
             // var_dump($product);
-            $product->setTitle($this->faker->word(3) . $i);
-            $product->setContent($this->faker->sentence(10) . $i);
-            $product->setAuthorId(1);
+            $fakeTrick->setName($this->faker->word(3) . $i);
+            $fakeTrick->setDescription($this->faker->sentence(10) . $i);
+            $fakeTrick->setAuthorId(1);
+            $createdAt = $this->faker->dateTimeBetween('-1 year', 'now');
+            $createdAtImmutable = DateTimeImmutable::createFromMutable($createdAt);
+            $fakeTrick->setCreatedAt($createdAtImmutable);
+            
+            $updatedAt = $this->faker->dateTimeBetween('-1 year', 'now');
+            $updatedAtImmutable = DateTimeImmutable::createFromMutable($updatedAt);
+            $fakeTrick->setUpdatedAt($updatedAtImmutable);
 
-            $manager->persist($product);
+            $manager->persist($fakeTrick);
         }
 
         $manager->flush();

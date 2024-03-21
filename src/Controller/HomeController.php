@@ -20,7 +20,7 @@ class HomeController extends AbstractController
     {
 
        return $this->render('base.html.twig', [
-           
+           "user" => $this->user
        ]);
     }
 }

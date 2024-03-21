@@ -11,10 +11,26 @@
             {% endblock %}
 
             {% block title %}
-                <h1>Bienvenue sur SnowTricks !</h1>
+                <h1 class="text-center mt-2">Bienvenue sur SnowTricks !</h1>
             {% endblock %}
 
             {% block main %}
+
+               <div class="row">
+                
+                    <form class="col-6 mx-auto" action="{{ path('app_auth_create') }}" method="post">
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Adresse email</label>
+                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email">
+                            <div id="emailHelp" class="form-text">Ne partagez pas votre mot de passe.</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputPassword1" class="form-label">Mot de passe</label>
+                            <input type="password" class="form-control" id="exampleInputPassword1" name="password">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Se connecter</button>
+                    </form>
+                </div>
                 {% block section %}
                     {% block aside %}{% endblock %}
                 {% endblock %}
