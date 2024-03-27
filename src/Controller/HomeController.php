@@ -16,11 +16,11 @@ class HomeController extends AbstractController
     private $user;
 
     #[Route("/", name: "app_home")]
-    public function index(): Response
+    public function home(): Response
     {
-
        return $this->render('home.twig', [
-           "user" => $this->user
+           "user" => $this->user,
+           "title" =>"Bienvenue sur SnowTicks",
        ]);
     }
 }
