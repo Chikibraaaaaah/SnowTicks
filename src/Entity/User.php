@@ -3,66 +3,49 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
-use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
-#[ORM\Table(name: '`user`')]
-class User
+#[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email'])]
+class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
-    #[Assert\NotBlank]
-    #[Assert\Unique]
-    #[Assert\Length(min: 5, max: 255)]
-    private ?string $userName = null;
-
-    #[ORM\Column(length: 255)]
-    #[Assert\NotBlank]
-    #[Assert\Email]
-    #[Assert\Unique]
+    #[ORM\Column(length: 180)]
     private ?string $email = null;
 
-    #[ORM\Column(length: 255)]
-    #[Assert\NotBlank]
-    #[SecurityAssert\UserPassword]
+    /**
+     * @var list<string> The user roles
+     */
+    #[ORM\Column]
+    private array $roles = [];
+
+    /**
+     * @var string The hashed password
+     */
+    #[ORM\Column]
     private ?string $password = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $img = null;
+
     #[ORM\Column]
-    private ?bool $role = null;
+    private ?\DateTimeImmutable $createdAt = null;
+
+    #[ORM\Column]
+    private ?\DateTimeImmutable $updateAt = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank]
-    private ?string $imgUrl = null;
-
-    #[ORM\Column(type: "datetime_immutable")]
-    #[Assert\DateTime]
-    private ?\DateTimeInterface $createdAt = null;
-
-    #[ORM\Column(type: "datetime_immutable")]
-    #[Assert\DateTime]
-    private ?\DateTimeImmutable $updatedAt = null;
+    private ?string $userName = null;
 
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getUserName(): ?string
-    {
-        return $this->userName;
-    }
-
-    public function setUserName(string $userName): static
-    {
-        $this->userName = $userName;
-
-        return $this;
     }
 
     public function getEmail(): ?string
@@ -77,7 +60,44 @@ class User
         return $this;
     }
 
-    public function getPassword(): ?string
+    /**
+     * A visual identifier that represents this user.
+     *
+     * @see UserInterface
+     */
+    public function getUserIdentifier(): string
+    {
+        return (string) $this->email;
+    }
+
+    /**
+     * @see UserInterface
+     *
+     * @return list<string>
+     */
+    public function getRoles(): array
+    {
+        $roles = $this->roles;
+        // guarantee every user at least has ROLE_USER
+        $roles[] = 'ROLE_USER';
+
+        return array_unique($roles);
+    }
+
+    /**
+     * @param list<string> $roles
+     */
+    public function setRoles(array $roles): static
+    {
+        $this->roles = $roles;
+
+        return $this;
+    }
+
+    /**
+     * @see PasswordAuthenticatedUserInterface
+     */
+    public function getPassword(): string
     {
         return $this->password;
     }
@@ -89,50 +109,59 @@ class User
         return $this;
     }
 
-    public function isRole(): ?bool
+    /**
+     * @see UserInterface
+     */
+    public function eraseCredentials(): void
     {
-        return $this->role;
+        // If you store any temporary, sensitive data on the user, clear it here
+        // $this->plainPassword = null;
     }
 
-    public function setRole(bool $role): static
+    public function getImg(): ?string
     {
-        $this->role = $role;
+        return $this->img;
+    }
+
+    public function setImg(string $img): static
+    {
+        $this->img = $img;
 
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeInterface
+    public function getCreatedAt(): ?\DateTimeImmutable
     {
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeInterface $createdAt): static
+    public function setCreatedAt(\DateTimeImmutable $createdAt): static
     {
         $this->createdAt = $createdAt;
 
         return $this;
     }
 
-    public function getUpdatedAt(): ?\DateTimeImmutable
+    public function getUpdateAt(): ?\DateTimeImmutable
     {
-        return $this->updatedAt;
+        return $this->updateAt;
     }
 
-    public function setUpdatedAt(\DateTimeImmutable $updatedAt): static
+    public function setUpdateAt(\DateTimeImmutable $updateAt): static
     {
-        $this->updatedAt = $updatedAt;
+        $this->updateAt = $updateAt;
 
         return $this;
     }
 
-    public function getImgUrl(): ?string
+    public function getUserName(): ?string
     {
-        return $this->imgUrl;
+        return $this->userName;
     }
 
-    public function setImgUrl(string $imgUrl): static
+    public function setUserName(string $userName): static
     {
-        $this->imgUrl = $imgUrl;
+        $this->userName = $userName;
 
         return $this;
     }
