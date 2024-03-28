@@ -9,9 +9,33 @@
         <figure class="figure col mx-auto ">
 
             <img src="./img/hero.png" alt="Snowtricks" class="figure-img img-fluid">
+            <figcaptio class="figure-caption">On dirait pas ....Mais c'est vraiment pas moi sur la photo</figcaption>
         
         </figure>
 
     </div>
+
+    {% block aside %}
+    
+        <div class="row">
+        
+            <h3 class="text-center">Bla bla actualité de la communauté</h3>
+
+            <figure class="figure">
+                <img src="./img/respect.webp" class="figure-img img-fluid" style="height: 350px" alt="Ce mec est rappeur, fais du skate, a fui le Vénézuela..... Respect !!! Il se fait appeler Alca pour la curiosité">
+                <figure>Avant j'avais des jambes... Aujourd'hui je te montre que tu n'as pas de .....</figure>
+            </figure>
+
+        </div>
+    
+    {% endblock %}
+
+    <div class="row">
+    
+        {% include "trick/listTricks.twig" %}
+
+    </div>
+
+
 
 {% endblock %}

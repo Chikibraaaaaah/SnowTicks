@@ -12,6 +12,11 @@
             {% block title %}{% endblock %}
             <main>
                 {% block main %}
+                {% if alert %}
+                    <div class="alert">
+                        <p class="alert-{{ alert.type }}">{{ alert.message }}</p>
+                    </div>
+                    {% endif %}
                     {% block section %}
                         {% block aside %}{% endblock %}
                     {% endblock %}

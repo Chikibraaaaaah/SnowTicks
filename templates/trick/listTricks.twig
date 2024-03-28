@@ -1,0 +1,16 @@
+{% block tricks %}
+
+{% for trick in tricks %}
+
+    <div class="card col-4 mx-auto ">
+        <img class="card-img-top" src="./img/904207_367719733364312_1426297796_o-620x412.jpg" alt="Card image cap">
+        <div class="card-body">
+        <h5 class="card-title">{{ trick.name }}</h5>
+        <p class="card-text">{{ trick.description }}</p>
+        <p class="card-text"><small class="text-muted">{{ trick.updatedAt|date('Y-m-d H:i:s') }}</small></p>
+        </div>
+    </div>
+    
+{% endfor %}
+
+{% endblock %}
